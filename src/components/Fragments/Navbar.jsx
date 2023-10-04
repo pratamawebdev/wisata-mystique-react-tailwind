@@ -34,7 +34,7 @@ const Navbar = () => {
           : "bg-transparent shadow-none"
       }`}
     >
-      <div className="header__container container flex h-24 items-center justify-between">
+      <div className="container flex items-center justify-between h-24 header__container">
         {/* header logo */}
         <Link
           to="/"
@@ -42,7 +42,7 @@ const Navbar = () => {
             stickyHeader ? "text-gray-900" : "text-white"
           }`}
         >
-          Travello.
+          Wisata Mystique
         </Link>
 
         {/* header menu */}
@@ -51,7 +51,7 @@ const Navbar = () => {
             menuOpen ? "right-0" : "-right-full"
           }`}
         >
-          <ul className="header__list mb-8 flex flex-col gap-8 md:mb-0 md:flex-row">
+          <ul className="flex flex-col gap-8 mb-8 header__list md:mb-0 md:flex-row">
             {[
               ["About", "/about"],
               ["Why Us", "/why-us"],
@@ -63,7 +63,7 @@ const Navbar = () => {
                 <Link
                   to={url}
                   className={`header__link group relative text-[15px] font-medium leading-tight text-gray-900 dark:text-white md:text-white ${
-                    stickyHeader ? "md:text-gray-900" : "md:text-white"
+                    stickyHeader ? "md:text-black" : "md:text-white"
                   }`}
                 >
                   {title}
@@ -94,7 +94,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="header__wrapper inline-flex items-center gap-5 md:hidden">
+        <div className="inline-flex items-center gap-5 header__wrapper md:hidden">
           {/* header theme toggle [mobile version] */}
           <div
             className={`header__theme cursor-pointer p-1 text-[1.3rem] dark:text-white ${
