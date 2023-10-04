@@ -38,7 +38,7 @@ const Navbar = () => {
         {/* header logo */}
         <Link
           to="/"
-          className={`header__logo font-serif text-[20px] font-semibold dark:text-white ${
+          className={`header__logo  text-[20px] font-semibold dark:text-white ${
             stickyHeader ? "text-gray-900" : "text-white"
           }`}
         >
