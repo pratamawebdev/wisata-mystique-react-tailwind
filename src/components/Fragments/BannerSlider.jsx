@@ -1,73 +1,76 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
+import useBanner from "../../hooks/useBanner";
 
 const BannerSlider = () => {
-  const slides = [
-    {
-      url: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2620&q=80",
-      text: "Beautiful Sunset View",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
-      text: "Majestic Mountains",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80",
-      text: "Peaceful Lake Reflection",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80",
-      text: "City Lights at Night",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
-      text: "Serene Forest Landscape",
-    },
-  ];
-
+  const { data, loading, error, setConfigBanner, configBanner } = useBanner();
+  const [datalist, setDatalist] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  useEffect(() => {
+    if (data && configBanner.key === "get") {
+      setDatalist(data?.data);
+    }
+    if (configBanner.key === "create") {
+      console.log(data?.message);
+    }
 
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
+    const autoSlide = () => {
+      const isLastSlide = currentIndex === datalist.length - 1;
+      const newIndex = isLastSlide ? 0 : currentIndex + 1;
+      setCurrentIndex(newIndex);
+    };
 
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
-  };
+    const intervalId = setInterval(autoSlide, 5000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [data, loading, error, configBanner, currentIndex, datalist]);
+
+  if (loading) return <div>Loading!!</div>;
 
   return (
     <div className="relative w-full h-screen m-auto group">
       <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+        style={{ backgroundImage: `url(${datalist[currentIndex]?.imageUrl})` }}
         className="relative w-full h-full duration-500 bg-center bg-cover"
       >
         <div className="absolute text-4xl font-bold text-white transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-          {slides[currentIndex].text}
+          {datalist[currentIndex]?.name}
         </div>
       </div>
-      {/* Left Arrow */}
+
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <BsChevronCompactLeft onClick={prevSlide} size={30} />
+        <BsChevronCompactLeft
+          onClick={() =>
+            setCurrentIndex((prev) =>
+              prev === 0 ? datalist.length - 1 : prev - 1
+            )
+          }
+          size={30}
+        />
       </div>
-      {/* Right Arrow */}
+
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <BsChevronCompactRight onClick={nextSlide} size={30} />
+        <BsChevronCompactRight
+          onClick={() =>
+            setCurrentIndex((prev) =>
+              prev === datalist.length - 1 ? 0 : prev + 1
+            )
+          }
+          size={30}
+        />
       </div>
-      <div className="flex justify-center py-2 top-4">
-        {slides.map((slide, slideIndex) => (
+      <div className="absolute flex justify-center py-2 bottom-4 left-1/2 right-1/2">
+        {datalist.slice(0, 5).map((_, slideIndex) => (
           <div
             key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-            className="text-2xl cursor-pointer"
+            onClick={() => setCurrentIndex(slideIndex)}
+            className={`text-2xl cursor-pointer ${
+              slideIndex === currentIndex ? "text-blue-500" : "text-gray-500"
+            }`}
           >
             <RxDotFilled />
           </div>
