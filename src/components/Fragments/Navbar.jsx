@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import useColorMode from "../../hooks/useColorMode";
@@ -9,6 +9,7 @@ import {
   RiMoonFill,
   RiSunFill,
 } from "react-icons/ri";
+import ProfileDropdown from "./ProfileDropdown";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ const Navbar = () => {
   const [colorMode, setColorMode] = useColorMode();
   return (
     <nav
-      className={`header fixed top-0 left-0 z-50 w-full transition-all duration-400 ${
+      className={`header fixed top-0 left-0 z-50 w-full transition-all duration-400 md:backdrop-blur-xl md:backdrop-filter ${
         stickyHeader
           ? "bg-white shadow-md dark:bg-gray-900"
           : "bg-transparent shadow-none"
@@ -38,8 +39,8 @@ const Navbar = () => {
         {/* header logo */}
         <Link
           to="/"
-          className={`header__logo  text-[20px] font-semibold dark:text-white ${
-            stickyHeader ? "text-gray-900" : "text-white"
+          className={`header__logo header__link text-5xl text-primaryColor ${
+            stickyHeader ? "text-gray-900" : "text-gray-800"
           }`}
         >
           Wisata Mystique
@@ -47,28 +48,30 @@ const Navbar = () => {
 
         {/* header menu */}
         <div
-          className={`header__menu fixed top-0 z-10 flex h-full w-[70%] flex-col justify-between bg-white px-10 pt-24 pb-10 shadow-[0_-4px_12px_rgba(0,0,0,0.12)] transition-all duration-400 dark:bg-gray-900 md:static md:z-auto md:h-auto md:w-auto md:flex-row md:items-center md:gap-8 md:bg-transparent md:p-0 md:shadow-none md:dark:bg-transparent ${
+          className={`fixed top-0 z-10 flex h-full w-[70%] flex-col justify-between bg-white px-10 pt-24 pb-10 shadow-[0_-4px_12px_rgba(0,0,0,0.12)] transition-all duration-400 dark:bg-gray-900 md:static md:z-auto md:h-auto md:w-auto md:flex-row md:items-center md:gap-8 md:bg-transparent md:p-0 md:shadow-none md:dark:bg-transparent ${
             menuOpen ? "right-0" : "-right-full"
           }`}
         >
           <ul className="flex flex-col gap-8 mb-8 header__list md:mb-0 md:flex-row">
             {[
-              ["About", "/about"],
-              ["Why Us", "/why-us"],
-              ["Trips", "/trips"],
-              ["Pricing", "/pricing"],
-              ["Contact", "/contact"],
+              ["Home", "/"],
+              ["About", "#about"],
+              ["Promo", "#promo"],
+              ["Activities", "#activities"],
+              ["Contact", "#contact"],
             ].map(([title, url]) => (
               <li key={url}>
                 <Link
                   to={url}
-                  className={`header__link group relative text-[15px] font-medium leading-tight text-gray-900 dark:text-white md:text-white ${
-                    stickyHeader ? "md:text-black" : "md:text-white"
+                  className={`header__link group relative text-[15px] font-medium leading-tight text-black dark:text-white ${
+                    stickyHeader
+                      ? "md:text-black  md:dark:text-white "
+                      : "md:text-white"
                   }`}
                 >
                   {title}
                   <div
-                    className={`absolute top-6 left-0 h-[3px] w-0 bg-blue-600 transition-all duration-400 group-hover:w-full ${
+                    className={`absolute top-6 left-0 h-[3px] w-0 bg-blue-600  transition-all duration-400 group-hover:w-full  ${
                       stickyHeader ? "md:bg-blue-600" : "md:bg-white"
                     }`}
                   />
@@ -89,6 +92,7 @@ const Navbar = () => {
             {colorMode === "light" ? <RiMoonFill /> : <RiSunFill />}
           </div>
 
+          <ProfileDropdown />
           <Link to="/register" className="header__button button">
             Register
           </Link>
