@@ -1,15 +1,16 @@
 // api.js
 import axios from "axios";
+import useLocalStorage from "./useLocalStorage";
 
 const API_KEY = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
+const [token, setToken] = useLocalStorage("authtoken", "");
 
 const axiosInstance = axios.create({
   baseURL: "https://travel-journal-api-bootcamp.do.dibimbing.id/", // Ganti dengan baseURL yang sesuai
   headers: {
     "Content-Type": "application/json",
     apiKey: API_KEY,
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndpbGx5cHJhdGFtYTIzMUBnbWFpbC5jb20iLCJ1c2VySWQiOiIzYzRkZjVjMC05YzA4LTQ4OWItYjdkZC0zMDY2YTM1ZDlmODgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTcxOTgzMTN9.UxGgINzXYatMZkf_bS28EuiCsNkSmzIy2GSu7I5CgNQ",
+    Authorization: `Bearer ${token}`,
   },
 });
 
