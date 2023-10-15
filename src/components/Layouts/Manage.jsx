@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const ManageLayout = ({ title, titleButton }) => {
   const endpoint = "api/v1/create-banner";
-  const { createApiData, fetchApiData } = useApi(endpoint);
+  const { createApiData } = useApi(endpoint);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 

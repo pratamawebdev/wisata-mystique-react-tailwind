@@ -23,7 +23,6 @@ const useApi = (endpoint) => {
   const createApiData = async (newData) => {
     try {
       setLoading(true);
-      await fetchApiData();
       const result = await createData(endpoint, newData);
       setData(result);
     } catch (error) {
@@ -57,9 +56,9 @@ const useApi = (endpoint) => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchApiData();
-  // }, [endpoint]);
+  useEffect(() => {
+    fetchApiData();
+  }, [endpoint]);
 
   return {
     data,
@@ -68,7 +67,6 @@ const useApi = (endpoint) => {
     createApiData,
     updateApiData,
     deleteApiData,
-    fetchApiData,
   };
 };
 

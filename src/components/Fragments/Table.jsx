@@ -5,11 +5,7 @@ const Table = () => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const endpoint = "api/v1/banners";
-  const { data, loading, error, fetchApiData } = useApi(endpoint);
-
-  useEffect(() => {
-    fetchApiData();
-  }, [endpoint]);
+  const { data, loading, error } = useApi(endpoint);
 
   if (loading) {
     return <p>Loading...</p>;
