@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import { RxDotFilled } from "react-icons/rx";
 import useBanner from "../../hooks/useBanner";
 
 const BannerSlider = () => {
@@ -43,25 +41,43 @@ const BannerSlider = () => {
       </div>
 
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <BsChevronCompactLeft
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="w-5 h-5"
           onClick={() =>
             setCurrentIndex((prev) =>
               prev === 0 ? datalist.length - 1 : prev - 1
             )
           }
-          size={30}
-        />
+        >
+          <path
+            fillRule="evenodd"
+            d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+            clipRule="evenodd"
+          />
+        </svg>
       </div>
 
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <BsChevronCompactRight
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="w-5 h-5"
           onClick={() =>
             setCurrentIndex((prev) =>
               prev === datalist.length - 1 ? 0 : prev + 1
             )
           }
-          size={30}
-        />
+        >
+          <path
+            fillRule="evenodd"
+            d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+            clipRule="evenodd"
+          />
+        </svg>
       </div>
       <div className="absolute flex justify-center py-2 bottom-4 left-1/2 right-1/2">
         {datalist.slice(0, 5).map((_, slideIndex) => (
@@ -72,7 +88,16 @@ const BannerSlider = () => {
               slideIndex === currentIndex ? "text-blue-500" : "text-gray-500"
             }`}
           >
-            <RxDotFilled />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-dots"
+              viewBox="0 0 16 16"
+            >
+              <circle cx="8" cy="8" r="8" />
+            </svg>
           </div>
         ))}
       </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import BannerSlider from "../Fragments/BannerSlider";
 
 const Hero = () => {

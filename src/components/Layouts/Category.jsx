@@ -1,6 +1,6 @@
-import CardPromo from "../Fragments/CardPromo";
+import HomeCardCategory from "../Fragments/HomeCardCategory";
 
-const Promo = () => {
+const Category = () => {
   return (
     <section className="transition-all destinations section duration-400 dark:bg-gray-900">
       <div className="container grid gap-12 ">
@@ -13,14 +13,12 @@ const Promo = () => {
           </h1>
         </div>
 
-        <div className="h-auto p-4 mx-auto overflow-hidden 2xl:max-w-5xl">
-          <div className="flex  gap-8 md:w-full sm:w-[50%] xs:w-[50%] w-[480%] animate-slide">
-            <CardPromo />
-          </div>
+        <div className=" grid grid-cols-[.8fr] justify-center gap-8 xs:mx-auto xs:max-w-sm xs:grid-cols-1 lg:max-w-2xl lg:grid-cols-2 xl:max-w-5xl xl:grid-cols-3">
+          <HomeCardCategory />
         </div>
       </div>
     </section>
   );
 };
 
-export default Promo;
+export default Category;

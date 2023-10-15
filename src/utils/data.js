@@ -1,10 +1,24 @@
 export const navItems = [
-  { link: "Home", path: "home" },
-  { link: "Service", path: "service" },
-  { link: "About", path: "about" },
-  { link: "Product", path: "product" },
-  { link: "Testimonial", path: "testimonial" },
-  { link: "FAQ", path: "faq" },
+  { title: "Home", url: "#banner" },
+  { title: "About", url: "#about" },
+  { title: "Category", url: "#category" },
+  { title: "Promo", url: "#promo" },
+  { title: "Activity", url: "#activity" },
+  { title: "Contact", url: "#contact" },
+];
+
+export const footerContentList1 = [
+  { title: "About", url: "/" },
+  { title: "Press release", url: "/" },
+  { title: "Environment", url: "/" },
+  { title: "Privacy policy", url: "/" },
+];
+
+export const footerContentList2 = [
+  { title: "Lift tickets", url: "/" },
+  { title: "Season passes", url: "/" },
+  { title: "Vacations package", url: "/" },
+  { title: "Best trips", url: "/" },
 ];
 
 export const LoginImage =
